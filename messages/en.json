@@ -1,0 +1,212 @@
+{
+  "common": {
+    "siteName": "TokenAcorn",
+    "tagline": "Stop overpaying for AI",
+    "dataUpdatedAt": "Data updated on {date}",
+    "priceDisclaimer": "Price data sourced from official websites. For reference only. Actual prices may vary.",
+    "perMillion": "/M",
+    "currency": {
+      "usd": "$ USD",
+      "cny": "¥ CNY"
+    }
+  },
+  "nav": {
+    "pricing": "Pricing",
+    "compare": "Compare",
+    "calculator": "Calculator",
+    "benchmarks": "Benchmarks"
+  },
+  "home": {
+    "heroTitle": "Stop overpaying for AI",
+    "heroDescription": "Compare pricing from {providerCount} major providers across {modelCount} models. Find the AI model that fits your budget.",
+    "lowestPrice": "Lowest input price: ${price}/M tokens",
+    "modelCount": "{count} models",
+    "filters": {
+      "allProviders": "All Providers",
+      "allCategories": "All Categories",
+      "sortFeatured": "Featured",
+      "sortPriceAsc": "Price: Low to High",
+      "sortPriceDesc": "Price: High to Low",
+      "sortContextDesc": "Context: Large to Small",
+      "sortName": "Name",
+      "hideDeprecated": "Hide deprecated",
+      "favoritesOnly": "Favorites only",
+      "viewGrid": "Cards",
+      "viewTable": "Table"
+    },
+    "compare": {
+      "selected": "{count} models selected for comparison (max 4)",
+      "clear": "Clear",
+      "start": "Start Compare"
+    },
+    "priceNote": "Note: Prices are per million tokens (/M). Data sourced from official websites. Some models have tiered pricing; standard rates shown. Please verify with official pricing.",
+    "milestone": {
+      "title": "Latest Releases",
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "daysAgo": "{days} days ago",
+      "weeksAgo": "{weeks} weeks ago",
+      "monthsAgo": "{months} months ago"
+    },
+    "priceLegend": {
+      "title": "Price Color Guide:",
+      "veryLow": "Very Low",
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "veryHigh": "Very High"
+    }
+  },
+  "model": {
+    "modelName": "Model",
+    "deprecated": "Deprecated",
+    "input": "Input",
+    "output": "Output",
+    "cachedInput": "Cached Input",
+    "pricePerToken": "Per Million Tokens",
+    "context": "Context",
+    "maxOutput": "Max Output",
+    "addCompare": "Add to Compare",
+    "selected": "Selected",
+    "noResults": "No models found",
+    "showDetails": "Show details",
+    "hideDetails": "Hide details",
+    "modelId": "Model ID",
+    "copyId": "Copy ID",
+    "notes": "Notes",
+    "releaseDate": "Release Date",
+    "knowledgeCutoff": "Knowledge Cutoff",
+    "cacheRate": "Cache Rate",
+    "updatedAt": "Updated",
+    "favorite": "Add to favorites",
+    "unfavorite": "Remove from favorites"
+  },
+  "category": {
+    "general": "LLM",
+    "llm": "LLM",
+    "embedding": "Embedding",
+    "audio": "Audio",
+    "image": "Image",
+    "video": "Video",
+    "moderation": "Moderation"
+  },
+  "capability": {
+    "text": "Text",
+    "vision": "Vision",
+    "image-gen": "Image Gen",
+    "code": "Code",
+    "function-call": "Function Call",
+    "json-mode": "JSON Mode",
+    "streaming": "Streaming",
+    "batch": "Batch",
+    "fine-tuning": "Fine-tuning",
+    "realtime": "Realtime"
+  },
+  "calculator": {
+    "title": "Token Calculator",
+    "description": "Estimate tokens, calculate costs, and plan your AI budget",
+    "tokenCounter": "Token Counter",
+    "pasteText": "Paste your text here to estimate token count...",
+    "characters": "Characters",
+    "estimatedTokens": "Estimated Tokens",
+    "tokenNote": "Token count is an estimate. Actual count may vary slightly between different models and tokenizers.",
+    "costCalculator": "Cost Calculator",
+    "dailyInput": "Daily Input Tokens",
+    "dailyOutput": "Daily Output Tokens",
+    "filterProvider": "Provider",
+    "sortBy": "Sort by",
+    "sortPriceDesc": "Price: High to Low",
+    "sortReleaseDate": "Release Date: Newest First",
+    "day": "day",
+    "month": "mo",
+    "cheapest": "Cheapest",
+    "andMore": "and {count} more models...",
+    "budgetCalculator": "Budget Calculator",
+    "myBudget": "My Budget",
+    "perDay": "Per Day",
+    "perMonth": "Per Month",
+    "budgetNote": "See how many input tokens your budget can afford, assuming 1M input is paired with 0.5M output.",
+    "inputTokens": "input tokens",
+    "tips": {
+      "title": "Tips:",
+      "tip1": "1 token ≈ 4 English characters or ≈ 0.6 Chinese characters",
+      "tip2": "Output tokens are typically 2-4x more expensive than input tokens",
+      "tip3": "Consider using cached input pricing for repeated prompts to save costs"
+    }
+  },
+  "compare": {
+    "title": "Model Comparison",
+    "addModel": "Add Model",
+    "clearAll": "Clear All",
+    "emptyTitle": "Start Comparing Models",
+    "emptyDescription": "Add up to 4 models to compare their pricing, capabilities, and parameters side by side.",
+    "quickStart": "Quick start with popular models:",
+    "addMorePrompt": "Add another model to start comparing",
+    "selectModel": "Select a Model",
+    "searchPlaceholder": "Search models...",
+    "priceComparison": "Price Comparison",
+    "costCalculator": "Cost Calculator",
+    "dailyInput": "Daily Input",
+    "dailyOutput": "Daily Output",
+    "monthlyEstimate": "per month",
+    "savesPercent": "saves {percent}%",
+    "parameters": "Parameters",
+    "capabilities": "Capabilities",
+    "alsoCompare": "Also compare with",
+    "quickConclusion": "Quick Conclusion",
+    "lowestPrice": "Lowest Price",
+    "largestContext": "Largest Context",
+    "mostCapabilities": "Most Capabilities",
+    "cheaper": "cheaper",
+    "more": "more",
+    "cheapest": "Cheapest",
+    "vsComparison": "vs Comparison",
+    "inputPrice": "Input Price",
+    "outputPrice": "Output Price",
+    "contextWindow": "Context Window",
+    "maxOutput": "Max Output",
+    "inputDiff": "Input Diff",
+    "outputDiff": "Output Diff"
+  },
+  "benchmarks": {
+    "title": "Model Performance Benchmarks",
+    "description": "View model performance across different capability dimensions to help you choose the best AI model",
+    "stats": {
+      "benchmarks": "Benchmarks",
+      "results": "Results",
+      "providers": "Providers"
+    },
+    "legend": "Provider Color Legend",
+    "search": {
+      "placeholder": "Search benchmarks, models or providers..."
+    },
+    "categories": {
+      "all": "All",
+      "reasoning": "Reasoning",
+      "coding": "Coding",
+      "math": "Math",
+      "multilingual": "Multilingual",
+      "longContext": "Long Context",
+      "comprehensive": "Comprehensive",
+      "general": "Other"
+    },
+    "categoryDescriptions": {
+      "reasoning": "Knowledge Q&A, logical reasoning and complex problem solving",
+      "coding": "Code generation, programming ability and software engineering",
+      "math": "Mathematical problem solving, logical operations and numerical computation",
+      "multilingual": "Multilingual understanding and cross-lingual capabilities",
+      "longContext": "Long text understanding, long context memory and processing",
+      "comprehensive": "Comprehensive evaluation and multi-dimensional capability testing",
+      "general": "Other specialized capability tests"
+    },
+    "showMore": "Show all {count} results",
+    "showLess": "Show less",
+    "rank": "#{rank}",
+    "dataSource": "Data source: Public benchmark platforms"
+  },
+  "footer": {
+    "dataSource": "Data updated on {date}",
+    "disclaimer": "Price data sourced from official websites. For reference only.",
+    "slogan": "Every token wisely spent is a seed for great AI."
+  }
+}

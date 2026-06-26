@@ -1,0 +1,212 @@
+{
+  "common": {
+    "siteName": "TokenAcorn",
+    "tagline": "别再为 AI 多花冤枉钱",
+    "dataUpdatedAt": "数据更新于 {date}",
+    "priceDisclaimer": "价格数据来源于各厂商官网，仅供参考。实际价格以官方为准。",
+    "perMillion": "/M",
+    "currency": {
+      "usd": "$ USD",
+      "cny": "¥ CNY"
+    }
+  },
+  "nav": {
+    "pricing": "价格总览",
+    "compare": "模型对比",
+    "calculator": "Token 计算器",
+    "benchmarks": "基准测试"
+  },
+  "home": {
+    "heroTitle": "别再为 AI 多花冤枉钱",
+    "heroDescription": "比较 {providerCount} 家主流厂商的 {modelCount} 个模型定价，找到最适合你的 AI 模型。",
+    "lowestPrice": "最低输入价格仅 ${price}/百万 Token",
+    "modelCount": "共 {count} 个模型",
+    "filters": {
+      "allProviders": "全部厂商",
+      "allCategories": "全部类别",
+      "sortFeatured": "推荐",
+      "sortPriceAsc": "价格: 低到高",
+      "sortPriceDesc": "价格: 高到低",
+      "sortContextDesc": "上下文: 大到小",
+      "sortName": "名称",
+      "hideDeprecated": "隐藏已弃用",
+      "favoritesOnly": "仅显示收藏",
+      "viewGrid": "卡片",
+      "viewTable": "表格"
+    },
+    "compare": {
+      "selected": "已选择 {count} 个模型进行对比（最多 4 个）",
+      "clear": "清除",
+      "start": "开始对比"
+    },
+    "priceNote": "说明：价格单位为每百万 Token（/M），数据来源于各厂商官网。部分模型在不同用量阶梯有不同定价，此处显示标准价格。实际费用请以官方计费为准。",
+    "milestone": {
+      "title": "最新发布",
+      "today": "今天",
+      "yesterday": "昨天",
+      "daysAgo": "{days} 天前",
+      "weeksAgo": "{weeks} 周前",
+      "monthsAgo": "{months} 月前"
+    },
+    "priceLegend": {
+      "title": "价格颜色说明：",
+      "veryLow": "极低",
+      "low": "较低",
+      "medium": "中等",
+      "high": "较高",
+      "veryHigh": "很高"
+    }
+  },
+  "model": {
+    "modelName": "模型",
+    "deprecated": "已弃用",
+    "input": "输入",
+    "output": "输出",
+    "cachedInput": "缓存输入",
+    "pricePerToken": "每百万 Token",
+    "context": "上下文",
+    "maxOutput": "最大输出",
+    "addCompare": "添加对比",
+    "selected": "已选择",
+    "noResults": "没有找到匹配的模型",
+    "showDetails": "展开详情",
+    "hideDetails": "收起详情",
+    "modelId": "模型 ID",
+    "copyId": "复制 ID",
+    "notes": "备注",
+    "releaseDate": "发布日期",
+    "knowledgeCutoff": "知识截止日期",
+    "cacheRate": "缓存率",
+    "updatedAt": "更新时间",
+    "favorite": "添加收藏",
+    "unfavorite": "取消收藏"
+  },
+  "category": {
+    "general": "大语言模型",
+    "llm": "大语言模型",
+    "embedding": "嵌入模型",
+    "audio": "音频模型",
+    "image": "图像模型",
+    "video": "视频模型",
+    "moderation": "内容审核"
+  },
+  "capability": {
+    "text": "文本",
+    "vision": "视觉",
+    "image-gen": "图像生成",
+    "code": "代码",
+    "function-call": "函数调用",
+    "json-mode": "JSON 模式",
+    "streaming": "流式输出",
+    "batch": "批量处理",
+    "fine-tuning": "微调",
+    "realtime": "实时"
+  },
+  "calculator": {
+    "title": "Token 计算器",
+    "description": "估算 Token 数量、计算费用、规划 AI 预算",
+    "tokenCounter": "Token 计数器",
+    "pasteText": "在此粘贴文本，估算 Token 数量...",
+    "characters": "字符数",
+    "estimatedTokens": "预估 Token",
+    "tokenNote": "Token 数量为估算值，不同模型和分词器的实际结果可能略有差异。",
+    "costCalculator": "费用计算",
+    "dailyInput": "日均输入 Token",
+    "dailyOutput": "日均输出 Token",
+    "filterProvider": "厂商",
+    "sortBy": "排序",
+    "sortPriceDesc": "价格：高到低",
+    "sortReleaseDate": "发布日期：最新在前",
+    "day": "天",
+    "month": "月",
+    "cheapest": "最便宜",
+    "andMore": "还有 {count} 个模型...",
+    "budgetCalculator": "预算计算",
+    "myBudget": "我的预算",
+    "perDay": "每天",
+    "perMonth": "每月",
+    "budgetNote": "查看你的预算能买多少输入 Token，按每 1M 输入搭配 0.5M 输出计算。",
+    "inputTokens": "输入 Token",
+    "tips": {
+      "title": "小贴士：",
+      "tip1": "1 个 Token ≈ 4 个英文字符 或 ≈ 1.7 个中文字符",
+      "tip2": "输出 Token 通常比输入 Token 贵 2-4 倍",
+      "tip3": "对于重复的提示词，可以使用缓存输入价格来节省成本"
+    }
+  },
+  "compare": {
+    "title": "模型对比",
+    "addModel": "添加模型",
+    "clearAll": "清空全部",
+    "emptyTitle": "开始对比模型",
+    "emptyDescription": "最多可添加 4 个模型，对比它们的定价、能力和参数。",
+    "quickStart": "快速选择热门模型：",
+    "addMorePrompt": "再添加一个模型开始对比",
+    "selectModel": "选择模型",
+    "searchPlaceholder": "搜索模型...",
+    "priceComparison": "价格对比",
+    "costCalculator": "费用计算器",
+    "dailyInput": "日均输入",
+    "dailyOutput": "日均输出",
+    "monthlyEstimate": "每月",
+    "savesPercent": "节省 {percent}%",
+    "parameters": "参数对比",
+    "capabilities": "能力对比",
+    "alsoCompare": "也可对比",
+    "quickConclusion": "快速结论",
+    "lowestPrice": "价格最低",
+    "largestContext": "上下文最大",
+    "mostCapabilities": "能力最多",
+    "cheaper": "更便宜",
+    "more": "更多",
+    "cheapest": "最便宜",
+    "vsComparison": "对比",
+    "inputPrice": "输入价格",
+    "outputPrice": "输出价格",
+    "contextWindow": "上下文窗口",
+    "maxOutput": "最大输出",
+    "inputDiff": "输入差异",
+    "outputDiff": "输出差异"
+  },
+  "benchmarks": {
+    "title": "模型性能基准测试",
+    "description": "查看各大模型在不同能力维度的表现，帮助你选择最适合的 AI 模型",
+    "stats": {
+      "benchmarks": "测试集",
+      "results": "测试结果",
+      "providers": "厂商"
+    },
+    "legend": "厂商颜色说明",
+    "search": {
+      "placeholder": "搜索测试集、模型或厂商..."
+    },
+    "categories": {
+      "all": "全部",
+      "reasoning": "推理能力",
+      "coding": "代码能力",
+      "math": "数学能力",
+      "multilingual": "多语言能力",
+      "longContext": "长文本能力",
+      "comprehensive": "综合能力",
+      "general": "其他"
+    },
+    "categoryDescriptions": {
+      "reasoning": "知识问答、逻辑推理和复杂问题求解",
+      "coding": "代码生成、编程能力和软件工程任务",
+      "math": "数学问题求解、逻辑运算和数值计算",
+      "multilingual": "多语言理解和跨语言能力",
+      "longContext": "长文本理解、长上下文记忆和处理",
+      "comprehensive": "综合评测和多维度能力测试",
+      "general": "其他专项能力测试"
+    },
+    "showMore": "展开查看全部 {count} 个结果",
+    "showLess": "收起",
+    "rank": "#{rank}",
+    "dataSource": "数据来源：公开基准测试平台"
+  },
+  "footer": {
+    "dataSource": "数据更新于 {date}",
+    "disclaimer": "价格数据来源于各厂商官网，仅供参考。实际价格以官方为准。",
+    "slogan": "每一个精打细算的 Token，都是通往伟大 AI 应用的种子。"
+  }
+}

@@ -1,0 +1,133 @@
+// TokenAcorn Database Schema
+// 支持 SQLite / MySQL / PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite" // 切换数据库只需改这里: "mysql", "postgresql"
+}
+
+// 厂商表
+model Provider {
+  id         String   @id
+  name       String
+  website    String?
+  logoFormat String?  @map("logo_format")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  models Model[]
+
+  @@map("providers")
+}
+
+// 模型表
+model Model {
+  id            String   @id
+  name          String
+  providerId    String   @map("provider_id")
+  category      String   @default("general") // general, llm, embedding, image, video, audio, moderation
+  contextWindow Int?     @map("context_window")
+  maxOutput     Int?     @map("max_output")
+  cacheRate     Int?     @map("cache_rate") // 缓存率百分比，如 90 表示 90%
+  deprecated    Boolean  @default(false)
+  releaseDate     String?  @map("release_date")
+  knowledgeCutoff String?  @map("knowledge_cutoff")
+  notes           String?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  provider     Provider           @relation(fields: [providerId], references: [id])
+  capabilities ModelCapability[]
+  pricingItems PricingItem[]
+  priceHistory PriceHistory[]
+  featured     FeaturedModel?
+
+  @@map("models")
+}
+
+// 模型能力表
+model ModelCapability {
+  modelId    String @map("model_id")
+  capability String // text, vision, image-gen, code, function-call, etc.
+
+  model Model @relation(fields: [modelId], references: [id], onDelete: Cascade)
+
+  @@id([modelId, capability])
+  @@map("model_capabilities")
+}
+
+// 价格表（支持多种计费方式）
+model PricingItem {
+  id          Int      @id @default(autoincrement())
+  modelId     String   @map("model_id")
+  pricingType String   @map("pricing_type") // token_input, token_output, token_cached, per_image, per_second, per_minute, per_character
+  tier        String   @default("standard") // standard, hd, 4k, 720p, 1080p, 1024x1024, etc.
+  price       Float
+  unit        String   @default("per_million") // per_million, per_unit, per_second, per_minute
+  conditions  String?  // JSON string for extra conditions
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  model Model @relation(fields: [modelId], references: [id], onDelete: Cascade)
+
+  @@unique([modelId, pricingType, tier])
+  @@map("pricing_items")
+}
+
+// 价格历史表
+model PriceHistory {
+  id          Int      @id @default(autoincrement())
+  modelId     String   @map("model_id")
+  pricingType String   @map("pricing_type")
+  tier        String   @default("standard")
+  oldPrice    Float?   @map("old_price")
+  newPrice    Float    @map("new_price")
+  recordedAt  DateTime @default(now()) @map("recorded_at")
+
+  model Model @relation(fields: [modelId], references: [id], onDelete: Cascade)
+
+  @@map("price_history")
+}
+
+// 推荐模型表
+model FeaturedModel {
+  modelId   String @id @map("model_id")
+  sortOrder Int    @default(0) @map("sort_order")
+
+  model Model @relation(fields: [modelId], references: [id], onDelete: Cascade)
+
+  @@map("featured_models")
+}
+
+// 基准测试表
+model Benchmark {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  category    String   @default("general") // 能力维度: reasoning, coding, math, multilingual, long-context, comprehensive
+  sortOrder   Int      @default(0) @map("sort_order")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  results BenchmarkResult[]
+
+  @@map("benchmarks")
+}
+
+// 基准测试结果表
+model BenchmarkResult {
+  id          String  @id @default(cuid())
+  benchmarkId String  @map("benchmark_id")
+  modelName   String  @map("model_name")
+  provider    String
+  score       Float
+  rank        Int
+
+  benchmark Benchmark @relation(fields: [benchmarkId], references: [id], onDelete: Cascade)
+
+  @@unique([benchmarkId, modelName, provider])
+  @@map("benchmark_results")
+}
