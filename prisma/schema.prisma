@@ -131,3 +131,16 @@ model BenchmarkResult {
   @@unique([benchmarkId, modelName, provider])
   @@map("benchmark_results")
 }
+
+// 新闻快讯表
+model News {
+  id          String   @id @default(cuid())
+  title       String
+  content     String
+  source      String?
+  publishedAt DateTime @default(now()) @map("published_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("news")
+}

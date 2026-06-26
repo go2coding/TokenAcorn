@@ -104,6 +104,29 @@ export async function getBenchmarks() {
   return benchmarks;
 }
 
+export interface NewsItem {
+  id: string;
+  title: string;
+  content: string;
+  source: string | null;
+  publishedAt: string;
+}
+
+export async function getLatestNews(limit: number = 50): Promise<NewsItem[]> {
+  const news = await prisma.news.findMany({
+    orderBy: { publishedAt: "desc" },
+    take: limit,
+  });
+
+  return news.map((n) => ({
+    id: n.id,
+    title: n.title,
+    content: n.content,
+    source: n.source,
+    publishedAt: n.publishedAt.toISOString(),
+  }));
+}
+
 // Helper to convert Prisma model to frontend format
 function toFrontendModel(
   model: {
