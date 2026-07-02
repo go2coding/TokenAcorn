@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface NewsItem {
   id: string;
@@ -131,9 +133,11 @@ function NewsCard({ item, t, isFirst }: { item: NewsItem; t: any; isFirst: boole
           </h3>
 
           {/* Content */}
-          <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-            {item.content}
-          </p>
+          <div className="prose prose-sm max-w-none text-neutral-600 dark:prose-invert dark:text-neutral-400">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {item.content}
+            </ReactMarkdown>
+          </div>
 
           {/* Footer */}
           <div className="mt-4 flex items-center justify-between border-t border-neutral-100 pt-3 dark:border-neutral-800">

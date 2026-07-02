@@ -14,7 +14,42 @@
     "pricing": "Pricing",
     "compare": "Compare",
     "calculator": "Calculator",
-    "benchmarks": "Benchmarks"
+    "benchmarks": "Benchmarks",
+    "lmarena": "LM Arena",
+    "news": "News"
+  },
+  "lmarena": {
+    "title": "LM Arena Leaderboard",
+    "description": "Explore crowdsourced model rankings across different task dimensions based on LMSYS Chatbot Arena data.",
+    "stats": {
+      "leaderboards": "Leaderboards",
+      "entries": "Entries",
+      "providers": "Providers"
+    },
+    "categories": {
+      "all": "All",
+      "llm": "LLM",
+      "image": "Image",
+      "video": "Video"
+    },
+    "search": {
+      "placeholder": "Search models, providers or leaderboards..."
+    },
+    "rank": "Rank",
+    "model": "Model",
+    "provider": "Provider",
+    "rating": "Rating",
+    "votes": "Votes",
+    "inputPrice": "Input Price",
+    "outputPrice": "Output Price",
+    "context": "Context",
+    "source": "Source",
+    "fetchedAt": "Fetched at",
+    "showMore": "Show all {count} results",
+    "showLess": "Show less",
+    "dataSource": "Data source: LMSYS Chatbot Arena",
+    "noResults": "No matching leaderboards found",
+    "noResultsDescription": "Try switching category or using a different search term."
   },
   "home": {
     "heroTitle": "Stop overpaying for AI",
@@ -203,6 +238,53 @@
     "showLess": "Show less",
     "rank": "#{rank}",
     "dataSource": "Data source: Public benchmark platforms"
+  },
+  "news": {
+    "title": "Model News",
+    "description": "Track the latest AI model releases, price changes, and industry updates",
+    "liveUpdates": "Live Updates",
+    "latest": "Latest",
+    "viewSource": "View Source",
+    "empty": "No news yet",
+    "emptyDescription": "There are no model news at the moment. Check back later.",
+    "footerNote": "News content is curated and published by administrators from official vendor channels.",
+    "time": {
+      "justNow": "Just now",
+      "minutesAgo": "{minutes} minutes ago",
+      "hoursAgo": "{hours} hours ago",
+      "yesterday": "Yesterday",
+      "daysAgo": "{days} days ago",
+      "weeksAgo": "{weeks} weeks ago"
+    }
+  },
+  "subscribe": {
+    "button": "Subscribe",
+    "title": "Subscribe to model updates",
+    "description": "Enter your email and we'll notify you when model prices, rankings, or new releases change.",
+    "placeholder": "your@email.com",
+    "submit": "Subscribe",
+    "submitting": "Sending...",
+    "cancel": "Cancel",
+    "success": "Verification email sent. Please check your inbox and click the verification link to complete your subscription. You won't receive updates until your email is verified.",
+    "errorGeneric": "Subscription failed. Please check your email address or try again later."
+  },
+  "verify": {
+    "loadingTitle": "Verifying email...",
+    "successTitle": "Verification successful",
+    "errorTitle": "Verification failed",
+    "success": "Your email has been verified. You're now subscribed to TokenAcorn updates.",
+    "missingToken": "Invalid verification link: missing token.",
+    "error": "Verification failed. The link may be expired or invalid.",
+    "backHome": "Back to home"
+  },
+  "unsubscribe": {
+    "loadingTitle": "Unsubscribing...",
+    "successTitle": "Unsubscribed",
+    "errorTitle": "Unsubscribe failed",
+    "success": "You've unsubscribed from TokenAcorn updates. You will no longer receive emails.",
+    "missingToken": "Invalid unsubscribe link: missing token.",
+    "error": "Unsubscribe failed. The link may be expired or invalid.",
+    "backHome": "Back to home"
   },
   "footer": {
     "dataSource": "Data updated on {date}",

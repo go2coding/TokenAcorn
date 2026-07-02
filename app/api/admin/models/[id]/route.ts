@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { verifyAdminRequest } from "@/lib/admin/auth";
+import { notifySubscribers, buildPriceChangeHtml } from "@/lib/notifications";
 
 export async function GET(
   request: NextRequest,
@@ -41,6 +42,12 @@ export async function PUT(
 
   try {
     const data = await request.json();
+    const priceChanges: {
+      pricingType: string;
+      tier: string;
+      oldPrice?: number | null;
+      newPrice: number;
+    }[] = [];
 
     const model = await prisma.$transaction(async (tx) => {
       const updated = await tx.model.update({
@@ -84,6 +91,12 @@ export async function PUT(
         );
         const newPrice = parseFloat(String(newItem.price));
         if (oldItem && oldItem.price !== newPrice) {
+          priceChanges.push({
+            pricingType: newItem.pricingType,
+            tier: newItem.tier || "standard",
+            oldPrice: oldItem.price,
+            newPrice,
+          });
           await tx.priceHistory.create({
             data: {
               modelId: id,
@@ -120,6 +133,18 @@ export async function PUT(
 
       return updated;
     });
+
+    if (priceChanges.length > 0) {
+      void notifySubscribers((locale) => {
+        const isZh = locale === "zh";
+        return {
+          subject: isZh
+            ? `价格更新：${model.name}`
+            : `Price update: ${model.name}`,
+          html: buildPriceChangeHtml(model.name, priceChanges, locale),
+        };
+      });
+    }
 
     return NextResponse.json(model);
   } catch (e) {

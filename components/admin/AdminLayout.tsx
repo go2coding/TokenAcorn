@@ -16,6 +16,10 @@ const navItems: NavItem[] = [
   { href: "/admin/models", labelKey: "nav.models", icon: "🤖" },
   { href: "/admin/featured", labelKey: "nav.featured", icon: "⭐" },
   { href: "/admin/benchmarks", labelKey: "nav.benchmarks", icon: "📊" },
+  { href: "/admin/lmarena", labelKey: "nav.lmarena", icon: "🏆" },
+  { href: "/admin/news", labelKey: "nav.news", icon: "📰" },
+  { href: "/admin/subscribers", labelKey: "nav.subscribers", icon: "✉️" },
+  { href: "/admin/email-templates", labelKey: "nav.emailTemplates", icon: "📝" },
 ];
 
 export default function AdminLayout({

@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { locales, localeNames, Locale } from "@/i18n/config";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { Currency } from "@/lib/currency";
+import SubscribeButton from "@/components/subscribe/SubscribeButton";
 
 const currencies: { value: Currency; label: string }[] = [
   { value: "USD", label: "$ USD" },
@@ -29,6 +30,13 @@ export default function Header() {
     router.push(segments.join("/") || "/");
   };
 
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/" || locales.some((l) => pathname === `/${l}`);
+    }
+    return pathname === href || pathname.endsWith(href);
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-neutral-200 bg-white/80 backdrop-blur-sm dark:border-neutral-800 dark:bg-neutral-950/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -42,31 +50,68 @@ export default function Header() {
         <nav className="hidden items-center gap-8 md:flex">
           <Link
             href="/"
-            className="text-base font-semibold text-neutral-700 hover:text-acorn-600 dark:text-neutral-200 dark:hover:text-acorn-400 transition-colors"
+            className={`text-base font-semibold transition-colors ${
+              isActive("/")
+                ? "text-acorn-600 dark:text-acorn-400"
+                : "text-neutral-700 hover:text-acorn-600 dark:text-neutral-200 dark:hover:text-acorn-400"
+            }`}
           >
             {t("nav.pricing")}
           </Link>
           <Link
             href="/compare"
-            className="text-base font-semibold text-neutral-700 hover:text-acorn-600 dark:text-neutral-200 dark:hover:text-acorn-400 transition-colors"
+            className={`text-base font-semibold transition-colors ${
+              isActive("/compare")
+                ? "text-acorn-600 dark:text-acorn-400"
+                : "text-neutral-700 hover:text-acorn-600 dark:text-neutral-200 dark:hover:text-acorn-400"
+            }`}
           >
             {t("nav.compare")}
           </Link>
           <Link
             href="/calculator"
-            className="text-base font-semibold text-neutral-700 hover:text-acorn-600 dark:text-neutral-200 dark:hover:text-acorn-400 transition-colors"
+            className={`text-base font-semibold transition-colors ${
+              isActive("/calculator")
+                ? "text-acorn-600 dark:text-acorn-400"
+                : "text-neutral-700 hover:text-acorn-600 dark:text-neutral-200 dark:hover:text-acorn-400"
+            }`}
           >
             {t("nav.calculator")}
           </Link>
           <Link
             href="/benchmarks"
-            className="text-base font-semibold text-neutral-700 hover:text-acorn-600 dark:text-neutral-200 dark:hover:text-acorn-400 transition-colors"
+            className={`text-base font-semibold transition-colors ${
+              isActive("/benchmarks")
+                ? "text-acorn-600 dark:text-acorn-400"
+                : "text-neutral-700 hover:text-acorn-600 dark:text-neutral-200 dark:hover:text-acorn-400"
+            }`}
           >
             {t("nav.benchmarks")}
+          </Link>
+          <Link
+            href="/lmarena"
+            className={`text-base font-semibold transition-colors ${
+              isActive("/lmarena")
+                ? "text-acorn-600 dark:text-acorn-400"
+                : "text-neutral-700 hover:text-acorn-600 dark:text-neutral-200 dark:hover:text-acorn-400"
+            }`}
+          >
+            {t("nav.lmarena")}
+          </Link>
+          <Link
+            href="/news"
+            className={`text-base font-semibold transition-colors ${
+              isActive("/news")
+                ? "text-acorn-600 dark:text-acorn-400"
+                : "text-neutral-700 hover:text-acorn-600 dark:text-neutral-200 dark:hover:text-acorn-400"
+            }`}
+          >
+            {t("nav.news")}
           </Link>
         </nav>
 
         <div className="flex items-center gap-2">
+          <SubscribeButton />
           <select
             value={currency}
             onChange={(e) => setCurrency(e.target.value as Currency)}

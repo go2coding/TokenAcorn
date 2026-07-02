@@ -90,6 +90,22 @@ export async function getModelById(id: string): Promise<Model | undefined> {
   return toFrontendModel(model, model.providerId);
 }
 
+// 获取最新快讯
+export async function getLatestNews(limit: number = 50) {
+  const news = await prisma.news.findMany({
+    orderBy: { publishedAt: "desc" },
+    take: limit,
+  });
+
+  return news.map((item) => ({
+    id: item.id,
+    title: item.title,
+    content: item.content,
+    source: item.source,
+    publishedAt: item.publishedAt.toISOString(),
+  }));
+}
+
 // 获取所有基准测试数据
 export async function getBenchmarks() {
   const benchmarks = await prisma.benchmark.findMany({
@@ -104,26 +120,22 @@ export async function getBenchmarks() {
   return benchmarks;
 }
 
-export interface NewsItem {
-  id: string;
-  title: string;
-  content: string;
-  source: string | null;
-  publishedAt: string;
-}
-
-export async function getLatestNews(limit: number = 50): Promise<NewsItem[]> {
-  const news = await prisma.news.findMany({
-    orderBy: { publishedAt: "desc" },
-    take: limit,
+// 获取所有 LM Arena 排行榜数据
+export async function getLmArenaLeaderboards() {
+  const leaderboards = await prisma.lmArenaLeaderboard.findMany({
+    include: {
+      entries: {
+        orderBy: [{ rank: "asc" }, { rating: "desc" }],
+      },
+    },
+    orderBy: [{ sortOrder: "asc" }, { title: "asc" }],
   });
 
-  return news.map((n) => ({
-    id: n.id,
-    title: n.title,
-    content: n.content,
-    source: n.source,
-    publishedAt: n.publishedAt.toISOString(),
+  return leaderboards.map((lb) => ({
+    ...lb,
+    fetchedAt: lb.fetchedAt?.toISOString() ?? null,
+    createdAt: lb.createdAt.toISOString(),
+    updatedAt: lb.updatedAt.toISOString(),
   }));
 }
 

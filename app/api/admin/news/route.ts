@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { verifyAdminRequest } from "@/lib/admin/auth";
+import { notifySubscribers, buildNewsHtml } from "@/lib/notifications";
 
 export async function GET() {
   if (!(await verifyAdminRequest())) {
@@ -36,6 +37,14 @@ export async function POST(request: NextRequest) {
         source: data.source || null,
         publishedAt: data.publishedAt ? new Date(data.publishedAt) : new Date(),
       },
+    });
+
+    void notifySubscribers((locale) => {
+      const isZh = locale === "zh";
+      return {
+        subject: isZh ? `模型快讯：${news.title}` : `Model News: ${news.title}`,
+        html: buildNewsHtml(news.title, news.content, locale),
+      };
     });
 
     return NextResponse.json(news, { status: 201 });

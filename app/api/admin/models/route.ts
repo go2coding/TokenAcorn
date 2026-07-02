@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { verifyAdminRequest } from "@/lib/admin/auth";
+import { notifySubscribers, buildModelReleaseHtml } from "@/lib/notifications";
 
 export async function GET(request: NextRequest) {
   if (!(await verifyAdminRequest())) {
@@ -98,6 +99,23 @@ export async function POST(request: NextRequest) {
       }
 
       return newModel;
+    });
+
+    const provider = await prisma.provider.findUnique({
+      where: { id: model.providerId },
+      select: { name: true },
+    });
+
+    void notifySubscribers((locale) => {
+      const isZh = locale === "zh";
+      return {
+        subject: isZh ? `新模型发布：${model.name}` : `New model: ${model.name}`,
+        html: buildModelReleaseHtml(
+          model.name,
+          provider?.name || model.providerId,
+          locale
+        ),
+      };
     });
 
     return NextResponse.json(model, { status: 201 });

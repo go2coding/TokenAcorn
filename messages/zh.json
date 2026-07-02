@@ -14,7 +14,42 @@
     "pricing": "价格总览",
     "compare": "模型对比",
     "calculator": "Token 计算器",
-    "benchmarks": "基准测试"
+    "benchmarks": "基准测试",
+    "lmarena": "LM Arena",
+    "news": "模型快讯"
+  },
+  "lmarena": {
+    "title": "LM Arena 排行榜",
+    "description": "基于 LMSYS Chatbot Arena 众测投票数据，查看各大模型在不同任务维度的真实排名。",
+    "stats": {
+      "leaderboards": "排行榜",
+      "entries": "模型条目",
+      "providers": "厂商"
+    },
+    "categories": {
+      "all": "全部",
+      "llm": "大语言模型",
+      "image": "图像生成",
+      "video": "视频生成"
+    },
+    "search": {
+      "placeholder": "搜索模型、厂商或榜单..."
+    },
+    "rank": "排名",
+    "model": "模型",
+    "provider": "厂商",
+    "rating": "评分",
+    "votes": "投票数",
+    "inputPrice": "输入价格",
+    "outputPrice": "输出价格",
+    "context": "上下文",
+    "source": "数据来源",
+    "fetchedAt": "数据抓取于",
+    "showMore": "展开查看全部 {count} 个结果",
+    "showLess": "收起",
+    "dataSource": "数据来源：LMSYS Chatbot Arena",
+    "noResults": "没有找到匹配的排行榜",
+    "noResultsDescription": "尝试切换分类或使用其他搜索词。"
   },
   "home": {
     "heroTitle": "别再为 AI 多花冤枉钱",
@@ -203,6 +238,53 @@
     "showLess": "收起",
     "rank": "#{rank}",
     "dataSource": "数据来源：公开基准测试平台"
+  },
+  "news": {
+    "title": "模型快讯",
+    "description": "追踪 AI 模型最新发布、价格调整与行业动态",
+    "liveUpdates": "实时更新",
+    "latest": "最新",
+    "viewSource": "查看来源",
+    "empty": "暂无快讯",
+    "emptyDescription": "目前还没有模型快讯，稍后再来看看吧。",
+    "footerNote": "快讯内容由管理员整理发布，来源为各厂商官方渠道。",
+    "time": {
+      "justNow": "刚刚",
+      "minutesAgo": "{minutes} 分钟前",
+      "hoursAgo": "{hours} 小时前",
+      "yesterday": "昨天",
+      "daysAgo": "{days} 天前",
+      "weeksAgo": "{weeks} 周前"
+    }
+  },
+  "subscribe": {
+    "button": "订阅动态",
+    "title": "订阅模型动态",
+    "description": "留下邮箱，当模型价格、排行榜或新模型发布有重要变化时，我们会第一时间通知你。",
+    "placeholder": "your@email.com",
+    "submit": "订阅",
+    "submitting": "发送中...",
+    "cancel": "取消",
+    "success": "验证邮件已发送。请前往邮箱点击验证链接完成订阅，验证通过后才会收到模型动态消息。",
+    "errorGeneric": "订阅失败，请检查邮箱地址或稍后重试。"
+  },
+  "verify": {
+    "loadingTitle": "正在验证邮箱...",
+    "successTitle": "验证成功",
+    "errorTitle": "验证失败",
+    "success": "邮箱验证成功，你已成功订阅 TokenAcorn 模型动态。",
+    "missingToken": "验证链接无效，缺少令牌。",
+    "error": "验证失败，链接可能已过期或无效。",
+    "backHome": "返回首页"
+  },
+  "unsubscribe": {
+    "loadingTitle": "正在取消订阅...",
+    "successTitle": "取消订阅成功",
+    "errorTitle": "取消订阅失败",
+    "success": "你已取消订阅 TokenAcorn 模型动态，不会再收到相关邮件。",
+    "missingToken": "取消订阅链接无效，缺少令牌。",
+    "error": "取消订阅失败，链接可能已过期或无效。",
+    "backHome": "返回首页"
   },
   "footer": {
     "dataSource": "数据更新于 {date}",

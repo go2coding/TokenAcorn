@@ -874,3 +874,154 @@ if __name__ == "__main__":
 - `per_unit` — 每单位
 - `per_second` — 每秒
 - `per_minute` — 每分钟
+
+---
+
+## 9. LM Arena 排行榜导入
+
+### 9.1 导入排行榜数据
+
+| 属性 | 值 |
+|------|------|
+| 方法 | `POST` |
+| 路径 | `/api/admin/lmarena/import` |
+| 请求体 | JSON，结构与 `lmarena_leaderboard.json` 相同 |
+| 认证 | 需要 `admin_session` Cookie |
+
+**请求体字段说明：**
+
+| 字段 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `fetch_time` | `string` | 否 | 数据抓取时间，ISO 8601 格式 |
+| `source_url` | `string` | 否 | 数据来源地址 |
+| `title` | `string` | 否 | 排行榜总标题 |
+| `leaderboards` | `object` | 是 | 各维度排行榜，key 为榜单标识，value 为条目数组 |
+
+**leaderboards 中每个条目的字段：**
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `rank` | `number` | 排名 |
+| `model_key` | `string \| null` | 模型 key |
+| `model_name` | `string` | 模型显示名称 |
+| `rating` | `number` | 评分 / Elo 分数 |
+| `votes` | `number` | 投票数 |
+| `organization` | `string` | 所属机构 |
+| `license` | `string \| null` | 许可证类型 |
+| `input_price_per_million` | `number \| null` | 输入价格（每百万 token） |
+| `output_price_per_million` | `number \| null` | 输出价格（每百万 token） |
+| `context_length` | `number \| null` | 上下文长度 |
+
+**请求示例：**
+
+```bash
+curl -X POST "http://localhost:3000/api/admin/lmarena/import" \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d @lmarena_leaderboard.json
+```
+
+**响应（200）：**
+
+```json
+{
+  "success": true,
+  "fetchedAt": "2026-06-29T03:29:25.764Z",
+  "leaderboards": [
+    { "key": "agent", "title": "LM Arena Leaderboard - agent", "count": 28 },
+    { "key": "text", "title": "LM Arena Leaderboard - text", "count": 200 },
+    { "key": "code", "title": "LM Arena Leaderboard - code", "count": 90 }
+  ]
+}
+```
+
+> 导入时会按 `key` 自动创建或更新 `LmArenaLeaderboard`，并清空该榜旧条目后重新写入。
+
+### 9.2 查询排行榜数据
+
+| 属性 | 值 |
+|------|------|
+| 方法 | `GET` |
+| 路径 | `/api/lmarena` |
+| 查询参数 | `key`（可选，按榜单标识筛选）、`category`（可选，按类别筛选） |
+| 认证 | 不需要 |
+
+**请求示例：**
+
+```bash
+# 查询所有排行榜
+curl "http://localhost:3000/api/lmarena"
+
+# 查询指定榜单
+curl "http://localhost:3000/api/lmarena?key=agent"
+
+# 按类别查询
+curl "http://localhost:3000/api/lmarena?category=llm"
+```
+
+**响应（200）：**
+
+```json
+[
+  {
+    "id": "...",
+    "key": "agent",
+    "title": "LM Arena Leaderboard - agent",
+    "description": "Source: https://arena.ai/leaderboard",
+    "category": "llm",
+    "sourceUrl": "https://arena.ai/leaderboard",
+    "fetchedAt": "2026-06-29T03:29:25.764Z",
+    "entries": [
+      {
+        "id": "...",
+        "rank": 1,
+        "modelKey": null,
+        "modelName": "Claude Fable 5 (High)",
+        "rating": 0.14000340089667881,
+        "votes": 16082,
+        "organization": "Anthropic",
+        "license": "Proprietary",
+        "inputPrice": null,
+        "outputPrice": null,
+        "contextLength": null
+      }
+    ]
+  }
+]
+```
+
+### 9.3 Python 示例
+
+```python
+import json
+import requests
+
+BASE_URL = "http://localhost:3000"
+ADMIN_PASSWORD = "your-admin-password"
+
+session = requests.Session()
+
+# 1. 登录
+resp = session.post(
+    f"{BASE_URL}/api/admin/auth/login",
+    json={"password": ADMIN_PASSWORD}
+)
+resp.raise_for_status()
+
+# 2. 读取本地 JSON 并导入
+with open("lmarena_leaderboard.json", "r", encoding="utf-8") as f:
+    payload = json.load(f)
+
+resp = session.post(
+    f"{BASE_URL}/api/admin/lmarena/import",
+    json=payload
+)
+resp.raise_for_status()
+print("导入结果:", resp.json())
+
+# 3. 查询公开接口
+resp = session.get(f"{BASE_URL}/api/lmarena?key=agent")
+resp.raise_for_status()
+agent_board = resp.json()[0]
+print(f"{agent_board['title']} 共 {len(agent_board['entries'])} 条")
+```

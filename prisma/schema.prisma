@@ -132,7 +132,46 @@ model BenchmarkResult {
   @@map("benchmark_results")
 }
 
-// 新闻快讯表
+// LM Arena 排行榜表
+model LmArenaLeaderboard {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  title       String
+  description String?
+  category    String   @default("llm") // llm, image, video
+  sourceUrl   String?  @map("source_url")
+  fetchedAt   DateTime? @map("fetched_at")
+  sortOrder   Int      @default(0) @map("sort_order")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  entries LmArenaEntry[]
+
+  @@map("lmarena_leaderboards")
+}
+
+// LM Arena 排行榜条目表
+model LmArenaEntry {
+  id              String   @id @default(cuid())
+  leaderboardId   String   @map("leaderboard_id")
+  rank            Int
+  modelKey        String?  @map("model_key")
+  modelName       String   @map("model_name")
+  rating          Float
+  votes           Int
+  organization    String
+  license         String?
+  inputPrice      Float?   @map("input_price")
+  outputPrice     Float?   @map("output_price")
+  contextLength   Int?     @map("context_length")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  leaderboard LmArenaLeaderboard @relation(fields: [leaderboardId], references: [id], onDelete: Cascade)
+
+  @@map("lmarena_entries")
+}
+
+// 模型快讯表
 model News {
   id          String   @id @default(cuid())
   title       String
@@ -143,4 +182,34 @@ model News {
   updatedAt   DateTime @updatedAt @map("updated_at")
 
   @@map("news")
+}
+
+// 邮件订阅用户表
+model EmailSubscriber {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  verified          Boolean   @default(false)
+  verificationToken String    @unique @map("verification_token")
+  unsubscribeToken  String    @unique @map("unsubscribe_token")
+  locale            String    @default("en")
+  verifiedAt        DateTime? @map("verified_at")
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+
+  @@map("email_subscribers")
+}
+
+// 邮件模板表
+model EmailTemplate {
+  id        String   @id @default(cuid())
+  key       String // verification, notification
+  name      String
+  locale    String
+  subject   String
+  htmlBody  String   @map("html_body")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([key, locale])
+  @@map("email_templates")
 }
