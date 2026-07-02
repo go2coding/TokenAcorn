@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 
-export default function VerifyPage() {
+function VerifyContent() {
   const t = useTranslations("verify");
   const locale = useLocale();
   const searchParams = useSearchParams();
@@ -64,5 +64,13 @@ export default function VerifyPage() {
         </Link>
       )}
     </div>
+  );
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense fallback={<div className="mx-auto max-w-2xl px-4 py-24 text-center">Loading...</div>}>
+      <VerifyContent />
+    </Suspense>
   );
 }

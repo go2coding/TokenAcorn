@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 
-export default function UnsubscribePage() {
+function UnsubscribeContent() {
   const t = useTranslations("unsubscribe");
   const locale = useLocale();
   const searchParams = useSearchParams();
@@ -63,5 +63,13 @@ export default function UnsubscribePage() {
         </Link>
       )}
     </div>
+  );
+}
+
+export default function UnsubscribePage() {
+  return (
+    <Suspense fallback={<div className="mx-auto max-w-2xl px-4 py-24 text-center">Loading...</div>}>
+      <UnsubscribeContent />
+    </Suspense>
   );
 }
