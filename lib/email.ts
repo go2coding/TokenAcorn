@@ -1,29 +1,41 @@
-import nodemailer from "nodemailer";
 import { randomBytes } from "crypto";
 import { getTemplate, renderTemplate } from "./email-templates";
 
-const host = process.env.SMTP_HOST;
-const port = parseInt(process.env.SMTP_PORT || "587", 10);
-const user = process.env.SMTP_USER;
-const pass = process.env.SMTP_PASS;
-const from = process.env.SMTP_FROM || user || "noreply@tokenacorn.xyz";
+const brevoApiKey = process.env.BREVO_API_KEY;
+const from = process.env.SMTP_FROM || "noreply@tokenacorn.xyz";
+const fromName = process.env.SMTP_FROM_NAME || "TokenAcorn";
 const siteUrl = (process.env.SITE_URL || "http://localhost:3000").replace(/\/$/, "");
 
 export function isEmailConfigured() {
-  return Boolean(host && user && pass);
+  return Boolean(brevoApiKey);
 }
 
-function createTransporter() {
-  if (!host || !user || !pass) {
-    throw new Error("Email SMTP credentials are not configured");
+async function sendEmail(to: string, subject: string, html: string) {
+  if (!brevoApiKey) {
+    throw new Error("BREVO_API_KEY is not configured");
   }
 
-  return nodemailer.createTransport({
-    host,
-    port,
-    secure: port === 465,
-    auth: { user, pass },
+  const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+    headers: {
+      "accept": "application/json",
+      "api-key": brevoApiKey,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      sender: { name: fromName, email: from },
+      to: [{ email: to }],
+      subject,
+      htmlContent: html,
+    }),
   });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Brevo API error: ${response.status} - ${error}`);
+  }
+
+  return response.json();
 }
 
 export function generateToken() {
@@ -53,13 +65,7 @@ export async function sendVerificationEmail(
     unsubscribeUrl: getUnsubscribeUrl(token, locale),
   });
 
-  const transporter = createTransporter();
-  await transporter.sendMail({
-    from: `"TokenAcorn" <${from}>`,
-    to,
-    subject,
-    html,
-  });
+  await sendEmail(to, subject, html);
 }
 
 export async function sendNotificationEmail(
@@ -82,11 +88,5 @@ export async function sendNotificationEmail(
       })
     : { html };
 
-  const transporter = createTransporter();
-  await transporter.sendMail({
-    from: `"TokenAcorn" <${from}>`,
-    to,
-    subject,
-    html: renderedHtml,
-  });
+  await sendEmail(to, subject, renderedHtml);
 }
