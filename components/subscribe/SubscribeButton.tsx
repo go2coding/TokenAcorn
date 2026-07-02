@@ -75,8 +75,19 @@ export default function SubscribeButton() {
         </p>
 
         {status === "success" ? (
-          <div className="mt-4 rounded-lg bg-green-50 p-4 text-sm text-green-700 dark:bg-green-900/20 dark:text-green-300">
-            {message}
+          <div className="mt-4">
+            <div className="rounded-lg bg-green-50 p-4 text-sm text-green-700 dark:bg-green-900/20 dark:text-green-300">
+              {message}
+            </div>
+            <div className="mt-4 flex justify-end">
+              <button
+                type="button"
+                onClick={close}
+                className="rounded-lg bg-acorn-600 px-4 py-2 text-sm font-semibold text-white hover:bg-acorn-700"
+              >
+                {t("confirm")}
+              </button>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="mt-4 space-y-3">
