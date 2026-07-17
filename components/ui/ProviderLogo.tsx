@@ -13,6 +13,7 @@ const PROVIDER_COLORS: Record<string, string> = {
   google: "#4285f4",
   deepseek: "#4f46e5",
   mistral: "#f97316",
+  kimi: "#111827",
   xai: "#000000",
 };
 
@@ -22,6 +23,7 @@ const PROVIDER_INITIALS: Record<string, string> = {
   google: "G",
   deepseek: "D",
   mistral: "M",
+  kimi: "K",
   xai: "X",
 };
 
@@ -31,6 +33,7 @@ const PROVIDER_LOGO_FORMAT: Record<string, "svg" | "png"> = {
   google: "png",
   deepseek: "svg",
   mistral: "svg",
+  kimi: "png",
 };
 
 export default function ProviderLogo({ provider, size = 24 }: ProviderLogoProps) {
