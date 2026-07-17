@@ -139,7 +139,54 @@
     "cacheRate": "Cache Rate",
     "updatedAt": "Updated",
     "favorite": "Add to favorites",
-    "unfavorite": "Remove from favorites"
+    "unfavorite": "Remove from favorites",
+    "viewDetails": "View details"
+  },
+  "modelDetail": {
+    "released": "Released {date}",
+    "copied": "Copied",
+    "compareModel": "Compare this model",
+    "pricingTitle": "Pricing details",
+    "pricingDescription": "Current published rates across available billing types and tiers.",
+    "priceType": "Billing type",
+    "tier": "Tier",
+    "unit": "Unit",
+    "price": "Price",
+    "costTitle": "Cost calculator",
+    "costDescription": "Enter your expected daily usage for each billing type.",
+    "dailyInput": "Daily input",
+    "dailyOutput": "Daily output",
+    "dailyCachedInput": "Daily cached input",
+    "perDay": "Estimated per day",
+    "perMonth": "Estimated per month",
+    "costNote": "Estimates use the current standard tier and exclude taxes, free quotas, batch discounts and provider-specific pricing.",
+    "specificationsTitle": "Model specifications",
+    "capabilitiesTitle": "Capabilities",
+    "provider": "Provider",
+    "unknown": "Not specified",
+    "historyTitle": "Price history",
+    "historyDescription": "Recorded changes to standard model pricing.",
+    "noHistory": "No price changes have been recorded for this model yet.",
+    "pricingTypes": {
+      "input": "Input tokens",
+      "output": "Output tokens",
+      "cachedInput": "Cached input",
+      "embedding": "Embedding",
+      "perCharacter": "Characters",
+      "perImage": "Images",
+      "perSecond": "Seconds",
+      "perMinute": "Minutes",
+      "perUnit": "Units",
+      "other": "Other"
+    },
+    "units": {
+      "perMillion": "per million",
+      "per_unit": "per unit",
+      "per_image": "per image",
+      "per_second": "per second",
+      "per_minute": "per minute",
+      "per_character": "per character"
+    }
   },
   "category": {
     "general": "LLM",
@@ -160,7 +207,8 @@
     "streaming": "Streaming",
     "batch": "Batch",
     "fine-tuning": "Fine-tuning",
-    "realtime": "Realtime"
+    "realtime": "Realtime",
+    "video": "Video"
   },
   "calculator": {
     "title": "Token Calculator",

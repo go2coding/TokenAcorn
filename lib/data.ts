@@ -1,5 +1,6 @@
 import prisma from "./db";
-import type { Provider, Model } from "@/types/model";
+import type { Provider, Model, ModelDetail } from "@/types/model";
+import { normalizeModelIdentifier } from "@/lib/model-url";
 
 export async function getAllProviders(): Promise<Provider[]> {
   const providers = await prisma.provider.findMany({
@@ -88,6 +89,79 @@ export async function getModelById(id: string): Promise<Model | undefined> {
 
   if (!model) return undefined;
   return toFrontendModel(model, model.providerId);
+}
+
+export async function getModelDetail(id: string): Promise<ModelDetail | undefined> {
+  const findModel = (modelId: string) =>
+    prisma.model.findUnique({
+      where: { id: modelId },
+      include: {
+        provider: true,
+        capabilities: true,
+        pricingItems: {
+          orderBy: [{ pricingType: "asc" }, { tier: "asc" }],
+        },
+        priceHistory: {
+          orderBy: { recordedAt: "asc" },
+        },
+      },
+    });
+
+  let model = await findModel(id);
+
+  if (!model) {
+    const normalizedIdentifier = normalizeModelIdentifier(id);
+    const candidates = await prisma.model.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+    const idMatches = candidates.filter(
+      (candidate) =>
+        normalizeModelIdentifier(candidate.id) === normalizedIdentifier
+    );
+    const nameMatches = candidates.filter(
+      (candidate) =>
+        normalizeModelIdentifier(candidate.name) === normalizedIdentifier
+    );
+    const matchedId =
+      idMatches.length === 1
+        ? idMatches[0].id
+        : nameMatches.length === 1
+          ? nameMatches[0].id
+          : undefined;
+
+    if (matchedId) {
+      model = await findModel(matchedId);
+    }
+  }
+
+  if (!model) return undefined;
+
+  return {
+    ...toFrontendModel(model, model.providerId),
+    providerInfo: {
+      id: model.provider.id,
+      name: model.provider.name,
+      website: model.provider.website ?? undefined,
+    },
+    pricingItems: model.pricingItems.map((item) => ({
+      pricingType: item.pricingType,
+      tier: item.tier,
+      price: item.price,
+      unit: item.unit,
+      conditions: item.conditions ?? undefined,
+    })),
+    priceHistory: model.priceHistory.map((entry) => ({
+      id: entry.id,
+      pricingType: entry.pricingType,
+      tier: entry.tier,
+      oldPrice: entry.oldPrice ?? undefined,
+      newPrice: entry.newPrice,
+      recordedAt: entry.recordedAt.toISOString(),
+    })),
+  };
 }
 
 // 获取最新快讯

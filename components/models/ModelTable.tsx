@@ -1,9 +1,11 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { Model, Provider, CAPABILITY_ICONS, VISIBLE_CAPABILITIES } from "@/types/model";
 import { formatPricePerMillion, Currency } from "@/lib/currency";
 import { formatNumber } from "@/lib/utils";
+import { getModelDetailPath } from "@/lib/model-url";
 import ProviderLogo from "@/components/ui/ProviderLogo";
 
 interface ModelTableProps {
@@ -34,6 +36,7 @@ export default function ModelTable({
   onFavoriteToggle,
 }: ModelTableProps) {
   const t = useTranslations();
+  const locale = useLocale();
 
   const getProvider = (providerId: string) => {
     return providers.find((p) => p.id === providerId);
@@ -99,8 +102,13 @@ export default function ModelTable({
                       <ProviderLogo provider={model.provider} size={24} />
                     )}
                     <div>
-                      <div className="font-medium text-neutral-900 dark:text-white flex items-center gap-2">
-                        {model.name}
+                      <div className="flex items-center gap-2 font-medium text-neutral-900 dark:text-white">
+                        <Link
+                          href={getModelDetailPath(model.id, locale)}
+                          className="hover:text-acorn-600 dark:hover:text-acorn-400"
+                        >
+                          {model.name}
+                        </Link>
                         {model.deprecated && (
                           <span className="text-xs bg-neutral-200 dark:bg-neutral-700 px-1.5 py-0.5 rounded">
                             {t("model.deprecated")}

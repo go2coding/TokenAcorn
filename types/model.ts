@@ -17,7 +17,8 @@ export type Capability =
   | "streaming"
   | "batch"
   | "fine-tuning"
-  | "realtime";
+  | "realtime"
+  | "video";
 
 export const VISIBLE_CAPABILITIES: Capability[] = [
   "text",
@@ -58,7 +59,35 @@ export interface Provider {
   models: Model[];
 }
 
+export interface ModelPricingItem {
+  pricingType: string;
+  tier: string;
+  price: number;
+  unit: string;
+  conditions?: string;
+}
+
+export interface ModelPriceHistoryEntry {
+  id: number;
+  pricingType: string;
+  tier: string;
+  oldPrice?: number;
+  newPrice: number;
+  recordedAt: string;
+}
+
+export interface ModelDetail extends Model {
+  providerInfo: {
+    id: string;
+    name: string;
+    website?: string;
+  };
+  pricingItems: ModelPricingItem[];
+  priceHistory: ModelPriceHistoryEntry[];
+}
+
 export const CAPABILITY_ICONS: Record<Capability, string> = {
+  video: "VID",
   text: "📝",
   vision: "👁️",
   "image-gen": "🎨",

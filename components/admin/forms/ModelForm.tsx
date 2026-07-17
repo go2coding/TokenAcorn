@@ -25,6 +25,7 @@ const CAPABILITIES = [
   "batch",
   "fine-tuning",
   "realtime",
+  "video",
 ] as const;
 
 const PRICING_TYPES = [

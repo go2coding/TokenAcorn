@@ -709,7 +709,108 @@ print("设置成功:", resp.json())
 
 ---
 
-## 4. 完整 Python 脚本示例
+## 4. 订阅与邮件管理
+
+### 4.1 列出所有订阅用户
+
+| 属性 | 值 |
+|------|------|
+| 方法 | `GET` |
+| 路径 | `/api/admin/subscribers` |
+
+**请求：**
+```bash
+curl -X GET "http://localhost:3000/api/admin/subscribers" \
+  -b cookies.txt
+```
+
+**响应（200）：**
+```json
+[
+  {
+    "id": 1,
+    "email": "user@example.com",
+    "verified": true,
+    "locale": "en",
+    "createdAt": "2024-06-10T07:30:00.000Z",
+    "verifiedAt": "2024-06-10T07:35:00.000Z"
+  }
+]
+```
+
+返回结果按 `verified` 降序、`createdAt` 降序排列，方便优先查看已验证的近期订阅用户。
+
+**Python 示例：**
+```python
+resp = session.get(f"{BASE_URL}/api/admin/subscribers")
+resp.raise_for_status()
+subscribers = resp.json()
+for s in subscribers:
+    status = "已验证" if s["verified"] else "未验证"
+    print(f"{s['email']} [{status}] {s['locale']}")
+```
+
+---
+
+### 4.2 发送邮件
+
+| 属性 | 值 |
+|------|------|
+| 方法 | `POST` |
+| 路径 | `/api/admin/send-email` |
+| 请求体 | JSON |
+
+**请求字段说明：**
+
+| 字段 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `to` | `string` | 是 | 收件人邮箱 |
+| `subject` | `string` | 是 | 邮件主题 |
+| `html` | `string` | 是 | 邮件 HTML 正文 |
+| `locale` | `string` | 否 | 邮件模板语言，默认从订阅用户记录读取，未找到则使用 `en` |
+
+> **注意**：发送邮件依赖 `BREVO_API_KEY` 环境变量。如果未配置，接口返回 `503`。系统会自动将邮件内容渲染为 `notification` 邮件模板，并附加退订链接（收件人必须是已订阅用户才能生成退订链接）。
+
+**请求：**
+```bash
+curl -X POST "http://localhost:3000/api/admin/send-email" \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{
+    "to": "user@example.com",
+    "subject": "TokenAcorn 更新通知",
+    "html": "<p>我们刚刚上线了新的模型对比功能，欢迎体验！</p>",
+    "locale": "zh"
+  }'
+```
+
+**响应（200）：**
+```json
+{
+  "success": true,
+  "message": "Email sent",
+  "to": "user@example.com"
+}
+```
+
+**Python 示例：**
+```python
+resp = session.post(
+    f"{BASE_URL}/api/admin/send-email",
+    json={
+        "to": "user@example.com",
+        "subject": "TokenAcorn 更新通知",
+        "html": "<p>我们刚刚上线了新的模型对比功能，欢迎体验！</p>",
+        "locale": "zh",
+    }
+)
+resp.raise_for_status()
+print(resp.json())
+```
+
+---
+
+## 5. 完整 Python 脚本示例
 
 ```python
 """
@@ -821,7 +922,7 @@ if __name__ == "__main__":
 
 ---
 
-## 5. 错误码说明
+## 6. 错误码说明
 
 | 状态码 | 含义 |
 |--------|------|
@@ -834,7 +935,7 @@ if __name__ == "__main__":
 
 ---
 
-## 6. 数据字典
+## 7. 数据字典
 
 ### cacheRate（缓存率）
 - 取值范围：`0` - `100`（百分比）
@@ -877,9 +978,9 @@ if __name__ == "__main__":
 
 ---
 
-## 9. LM Arena 排行榜导入
+## 10. LM Arena 排行榜导入
 
-### 9.1 导入排行榜数据
+### 10.1 导入排行榜数据
 
 | 属性 | 值 |
 |------|------|
@@ -937,7 +1038,7 @@ curl -X POST "http://localhost:3000/api/admin/lmarena/import" \
 
 > 导入时会按 `key` 自动创建或更新 `LmArenaLeaderboard`，并清空该榜旧条目后重新写入。
 
-### 9.2 查询排行榜数据
+### 10.2 查询排行榜数据
 
 | 属性 | 值 |
 |------|------|
@@ -990,7 +1091,7 @@ curl "http://localhost:3000/api/lmarena?category=llm"
 ]
 ```
 
-### 9.3 Python 示例
+### 10.3 Python 示例
 
 ```python
 import json

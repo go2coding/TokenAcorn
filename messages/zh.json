@@ -139,7 +139,54 @@
     "cacheRate": "缓存率",
     "updatedAt": "更新时间",
     "favorite": "添加收藏",
-    "unfavorite": "取消收藏"
+    "unfavorite": "取消收藏",
+    "viewDetails": "查看详情"
+  },
+  "modelDetail": {
+    "released": "发布于 {date}",
+    "copied": "已复制",
+    "compareModel": "对比此模型",
+    "pricingTitle": "价格详情",
+    "pricingDescription": "展示当前可用计费类型和价格层级的公开价格。",
+    "priceType": "计费类型",
+    "tier": "价格层级",
+    "unit": "计费单位",
+    "price": "价格",
+    "costTitle": "费用计算",
+    "costDescription": "按不同计费类型填写预计每日用量。",
+    "dailyInput": "每日输入",
+    "dailyOutput": "每日输出",
+    "dailyCachedInput": "每日缓存输入",
+    "perDay": "预计每日",
+    "perMonth": "预计每月",
+    "costNote": "估算使用当前标准价格层级，不包含税费、免费额度、批处理折扣和厂商特殊价格。",
+    "specificationsTitle": "模型规格",
+    "capabilitiesTitle": "模型能力",
+    "provider": "厂商",
+    "unknown": "暂未提供",
+    "historyTitle": "价格历史",
+    "historyDescription": "标准价格的历史变更记录。",
+    "noHistory": "该模型暂时没有已记录的价格变更。",
+    "pricingTypes": {
+      "input": "输入 Token",
+      "output": "输出 Token",
+      "cachedInput": "缓存输入",
+      "embedding": "向量嵌入",
+      "perCharacter": "字符",
+      "perImage": "图片",
+      "perSecond": "秒",
+      "perMinute": "分钟",
+      "perUnit": "单位",
+      "other": "其他"
+    },
+    "units": {
+      "perMillion": "每百万",
+      "per_unit": "每单位",
+      "per_image": "每张图片",
+      "per_second": "每秒",
+      "per_minute": "每分钟",
+      "per_character": "每字符"
+    }
   },
   "category": {
     "general": "大语言模型",
@@ -160,7 +207,8 @@
     "streaming": "流式输出",
     "batch": "批量处理",
     "fine-tuning": "微调",
-    "realtime": "实时"
+    "realtime": "实时",
+    "video": "视频"
   },
   "calculator": {
     "title": "Token 计算器",

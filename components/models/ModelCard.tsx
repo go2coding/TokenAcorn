@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { Model, CAPABILITY_ICONS, VISIBLE_CAPABILITIES } from "@/types/model";
 import { formatPricePerMillion, Currency } from "@/lib/currency";
 import { formatNumber } from "@/lib/utils";
+import { getModelDetailPath } from "@/lib/model-url";
 import ProviderLogo from "@/components/ui/ProviderLogo";
 
 interface ModelCardProps {
@@ -43,6 +45,7 @@ export default function ModelCard({
   maxContextWindow = 2000000,
 }: ModelCardProps) {
   const t = useTranslations();
+  const locale = useLocale();
   const [isExpanded, setIsExpanded] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -101,8 +104,13 @@ export default function ModelCard({
           <ProviderLogo provider={model.provider} size={36} />
         )}
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-neutral-900 dark:text-white truncate">
-            {model.name}
+          <h3 className="truncate font-semibold text-neutral-900 dark:text-white">
+            <Link
+              href={getModelDetailPath(model.id, locale)}
+              className="hover:text-acorn-600 dark:hover:text-acorn-400"
+            >
+              {model.name}
+            </Link>
           </h3>
           {providerWebsite ? (
             <a href={providerWebsite} target="_blank" rel="noopener noreferrer" className="text-sm text-neutral-500 hover:text-acorn-600 hover:underline transition-colors">
@@ -163,17 +171,21 @@ export default function ModelCard({
                 {formatPricePerMillion(model.pricing.output, currency)}
               </span>
             </div>
-            {model.pricing.cachedInput !== undefined && (
-              <div className="flex justify-between text-sm">
-                <span className="text-neutral-500">{t("model.cachedInput")}</span>
+            <div className="flex justify-between text-sm">
+              <span className="text-neutral-500">{t("model.cachedInput")}</span>
+              {model.pricing.cachedInput !== undefined ? (
                 <span className="font-medium text-green-600">
                   {formatPricePerMillion(model.pricing.cachedInput, currency)}
-                  <span className="ml-1 text-xs text-green-500">
-                    (-{Math.round((1 - model.pricing.cachedInput / model.pricing.input) * 100)}%)
-                  </span>
+                  {model.pricing.input > 0 && (
+                    <span className="ml-1 text-xs text-green-500">
+                      (-{Math.round((1 - model.pricing.cachedInput / model.pricing.input) * 100)}%)
+                    </span>
+                  )}
                 </span>
-              </div>
-            )}
+              ) : (
+                <span className="font-medium text-neutral-400">-</span>
+              )}
+            </div>
           </>
         )}
       </div>
@@ -258,19 +270,26 @@ export default function ModelCard({
         </div>
       )}
 
-      {/* Compare Button */}
-      {onCompare && (
-        <button
-          onClick={() => onCompare(model)}
-          className={`mt-4 w-full rounded-lg py-2 text-sm font-medium transition-colors ${
-            isSelected
-              ? "bg-acorn-500 text-white hover:bg-acorn-600"
-              : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700"
-          }`}
+      <div className="mt-4 grid grid-cols-2 gap-2">
+        <Link
+          href={getModelDetailPath(model.id, locale)}
+          className="flex min-h-10 items-center justify-center rounded-lg border border-neutral-200 px-3 py-2 text-center text-sm font-medium leading-none text-neutral-700 transition-colors hover:border-acorn-400 hover:text-acorn-600 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-acorn-500"
         >
-          {isSelected ? t("model.selected") : t("model.addCompare")}
-        </button>
-      )}
+          {t("model.viewDetails")}
+        </Link>
+        {onCompare && (
+          <button
+            onClick={() => onCompare(model)}
+            className={`flex min-h-10 items-center justify-center rounded-lg px-3 py-2 text-sm font-medium leading-none transition-colors ${
+              isSelected
+                ? "bg-acorn-500 text-white hover:bg-acorn-600"
+                : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700"
+            }`}
+          >
+            {isSelected ? t("model.selected") : t("model.addCompare")}
+          </button>
+        )}
+      </div>
     </div>
   );
 }
