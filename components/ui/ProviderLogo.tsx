@@ -34,6 +34,7 @@ const PROVIDER_LOGO_FORMAT: Record<string, "svg" | "png"> = {
   deepseek: "svg",
   mistral: "svg",
   kimi: "png",
+  bigmodel: "png",
 };
 
 export default function ProviderLogo({ provider, size = 24 }: ProviderLogoProps) {

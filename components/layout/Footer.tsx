@@ -20,7 +20,7 @@ export default function Footer() {
             <span>{t("footer.dataSource", { date: "2026-06-01" })}</span>
             <span>•</span>
             <a
-              href="https://github.com"
+              href="https://github.com/go2coding/TokenAcorn"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-neutral-700 dark:hover:text-neutral-300"
