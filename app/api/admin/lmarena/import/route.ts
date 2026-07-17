@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { timingSafeEqual } from "crypto";
 import prisma from "@/lib/db";
 import { verifyAdminRequest } from "@/lib/admin/auth";
 import { notifySubscribers, buildLmArenaHtml } from "@/lib/notifications";
@@ -36,8 +37,31 @@ function inferCategory(key: string): string {
   return "llm";
 }
 
+function tokensMatch(actual: string, expected: string): boolean {
+  const actualBuffer = Buffer.from(actual);
+  const expectedBuffer = Buffer.from(expected);
+  return (
+    actualBuffer.length === expectedBuffer.length &&
+    timingSafeEqual(actualBuffer, expectedBuffer)
+  );
+}
+
+async function verifyImportRequest(request: NextRequest): Promise<boolean> {
+  if (await verifyAdminRequest()) {
+    return true;
+  }
+
+  const expectedToken = process.env.LMARENA_IMPORT_TOKEN;
+  const authorization = request.headers.get("authorization");
+  if (!expectedToken || !authorization?.startsWith("Bearer ")) {
+    return false;
+  }
+
+  return tokensMatch(authorization.slice("Bearer ".length).trim(), expectedToken);
+}
+
 export async function POST(request: NextRequest) {
-  if (!(await verifyAdminRequest())) {
+  if (!(await verifyImportRequest(request))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

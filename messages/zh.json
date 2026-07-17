@@ -19,8 +19,11 @@
     "news": "模型快讯"
   },
   "lmarena": {
+    "eyebrow": "社区实战排名",
     "title": "LM Arena 排行榜",
     "description": "基于 LMSYS Chatbot Arena 众测投票数据，查看各大模型在不同任务维度的真实排名。",
+    "lastUpdated": "最近更新于 {date}",
+    "officialSource": "查看官方数据",
     "stats": {
       "leaderboards": "排行榜",
       "entries": "模型条目",
@@ -33,7 +36,23 @@
       "video": "视频生成"
     },
     "search": {
-      "placeholder": "搜索模型、厂商或榜单..."
+      "label": "搜索 LM Arena 排行榜",
+      "placeholder": "搜索模型、厂商、许可证或榜单...",
+      "clear": "清除搜索"
+    },
+    "leaderboards": {
+      "agent": "智能体能力",
+      "text": "文本对话",
+      "code": "代码与网页开发",
+      "vision": "视觉理解",
+      "document": "文档理解",
+      "search": "联网搜索",
+      "textToImage": "文生图",
+      "imageEdit": "图像编辑",
+      "imageToCode": "图像转代码",
+      "textToVideo": "文生视频",
+      "imageToVideo": "图生视频",
+      "videoToVideo": "视频编辑"
     },
     "rank": "排名",
     "model": "模型",
@@ -45,11 +64,17 @@
     "context": "上下文",
     "source": "数据来源",
     "fetchedAt": "数据抓取于",
+    "topRanked": "当前榜首",
+    "tableCaption": "社区模型排名",
     "showMore": "展开查看全部 {count} 个结果",
     "showLess": "收起",
     "dataSource": "数据来源：LMSYS Chatbot Arena",
+    "methodologyLabel": "如何阅读排行榜",
+    "methodologyDescription": "排行榜来自真实用户的匿名两两模型对战投票。不同榜单的评分尺度可能不同，更适合在同一个榜单内部比较模型，而不是跨榜单直接比较分数。",
+    "ratingDescription": "根据社区对战结果计算的相对能力分数，数值越高代表当前榜单中的综合表现越强。",
+    "votesDescription": "模型参与社区匿名对战并获得的有效投票数量，可用于判断当前评分的数据基础。",
     "noResults": "没有找到匹配的排行榜",
-    "noResultsDescription": "尝试切换分类或使用其他搜索词。"
+    "noResultsDescription": "尝试使用其他模型名称、厂商名称或榜单关键词。"
   },
   "home": {
     "heroTitle": "别再为 AI 多花冤枉钱",
@@ -204,6 +229,7 @@
     "outputDiff": "输出差异"
   },
   "benchmarks": {
+    "eyebrow": "公开评测数据",
     "title": "模型性能基准测试",
     "description": "查看各大模型在不同能力维度的表现，帮助你选择最适合的 AI 模型",
     "stats": {
@@ -213,7 +239,9 @@
     },
     "legend": "厂商颜色说明",
     "search": {
-      "placeholder": "搜索测试集、模型或厂商..."
+      "label": "搜索模型性能基准测试",
+      "placeholder": "搜索测试集、模型或厂商...",
+      "clear": "清除搜索"
     },
     "categories": {
       "all": "全部",
@@ -234,9 +262,20 @@
       "comprehensive": "综合评测和多维度能力测试",
       "general": "其他专项能力测试"
     },
+    "topPerformer": "当前榜首",
+    "topResults": "领先模型",
+    "score": "得分",
+    "rankLabel": "排名",
+    "modelLabel": "模型",
+    "providerLabel": "厂商",
     "showMore": "展开查看全部 {count} 个结果",
     "showLess": "收起",
     "rank": "#{rank}",
+    "noResults": "没有找到匹配的基准测试",
+    "noResultsDescription": "尝试使用其他测试集、模型或厂商关键词，或者重置分类筛选。",
+    "resetFilters": "重置筛选",
+    "methodologyLabel": "如何阅读评测结果",
+    "methodologyDescription": "页面汇总公开基准测试结果。不同测试集的任务范围、评分方式和数据版本可能不同，分数更适合在同一个测试集内部比较，最终选型还应结合真实业务场景验证。",
     "dataSource": "数据来源：公开基准测试平台"
   },
   "news": {

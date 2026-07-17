@@ -19,8 +19,11 @@
     "news": "News"
   },
   "lmarena": {
+    "eyebrow": "Community battle rankings",
     "title": "LM Arena Leaderboard",
     "description": "Explore crowdsourced model rankings across different task dimensions based on LMSYS Chatbot Arena data.",
+    "lastUpdated": "Last updated {date}",
+    "officialSource": "View official data",
     "stats": {
       "leaderboards": "Leaderboards",
       "entries": "Entries",
@@ -33,7 +36,23 @@
       "video": "Video"
     },
     "search": {
-      "placeholder": "Search models, providers or leaderboards..."
+      "label": "Search LM Arena leaderboards",
+      "placeholder": "Search models, providers, licenses or leaderboards...",
+      "clear": "Clear search"
+    },
+    "leaderboards": {
+      "agent": "Agent Capability",
+      "text": "Text Chat",
+      "code": "Code & Web Development",
+      "vision": "Vision Understanding",
+      "document": "Document Understanding",
+      "search": "Web Search",
+      "textToImage": "Text to Image",
+      "imageEdit": "Image Editing",
+      "imageToCode": "Image to Code",
+      "textToVideo": "Text to Video",
+      "imageToVideo": "Image to Video",
+      "videoToVideo": "Video Editing"
     },
     "rank": "Rank",
     "model": "Model",
@@ -45,11 +64,17 @@
     "context": "Context",
     "source": "Source",
     "fetchedAt": "Fetched at",
+    "topRanked": "Current leader",
+    "tableCaption": "community model rankings",
     "showMore": "Show all {count} results",
     "showLess": "Show less",
     "dataSource": "Data source: LMSYS Chatbot Arena",
+    "methodologyLabel": "How to read the leaderboard",
+    "methodologyDescription": "Rankings are based on anonymous, head-to-head model battles voted on by real users. Rating scales can differ between leaderboards, so scores are best compared within the same leaderboard rather than across tasks.",
+    "ratingDescription": "A relative capability score calculated from community battle outcomes. Higher values indicate stronger performance within the current leaderboard.",
+    "votesDescription": "The number of valid community votes collected through anonymous model battles, indicating the evidence behind each rating.",
     "noResults": "No matching leaderboards found",
-    "noResultsDescription": "Try switching category or using a different search term."
+    "noResultsDescription": "Try another model name, provider, or leaderboard keyword."
   },
   "home": {
     "heroTitle": "Stop overpaying for AI",
@@ -204,6 +229,7 @@
     "outputDiff": "Output Diff"
   },
   "benchmarks": {
+    "eyebrow": "Public evaluation data",
     "title": "Model Performance Benchmarks",
     "description": "View model performance across different capability dimensions to help you choose the best AI model",
     "stats": {
@@ -213,7 +239,9 @@
     },
     "legend": "Provider Color Legend",
     "search": {
-      "placeholder": "Search benchmarks, models or providers..."
+      "label": "Search model performance benchmarks",
+      "placeholder": "Search benchmarks, models or providers...",
+      "clear": "Clear search"
     },
     "categories": {
       "all": "All",
@@ -234,9 +262,20 @@
       "comprehensive": "Comprehensive evaluation and multi-dimensional capability testing",
       "general": "Other specialized capability tests"
     },
+    "topPerformer": "Current leader",
+    "topResults": "Leading models",
+    "score": "Score",
+    "rankLabel": "Rank",
+    "modelLabel": "Model",
+    "providerLabel": "Provider",
     "showMore": "Show all {count} results",
     "showLess": "Show less",
     "rank": "#{rank}",
+    "noResults": "No matching benchmarks found",
+    "noResultsDescription": "Try another benchmark, model, or provider keyword, or reset the category filter.",
+    "resetFilters": "Reset filters",
+    "methodologyLabel": "How to read benchmark results",
+    "methodologyDescription": "This page aggregates results from public benchmark platforms. Task coverage, scoring methods, and dataset versions differ between benchmarks, so scores are best compared within the same test and should be validated against your real use case.",
     "dataSource": "Data source: Public benchmark platforms"
   },
   "news": {

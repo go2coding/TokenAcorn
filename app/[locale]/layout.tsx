@@ -37,11 +37,13 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col bg-neutral-50 dark:bg-neutral-950">
+      <body className="flex min-h-screen flex-col bg-white dark:bg-neutral-950">
         <NextIntlClientProvider messages={messages}>
           <CurrencyProvider>
             <Header />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1 bg-white dark:bg-neutral-950">
+              {children}
+            </main>
             <Footer />
           </CurrencyProvider>
         </NextIntlClientProvider>
