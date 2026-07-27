@@ -21,6 +21,7 @@
 npm-debug.log*
 
 # local env files
+.env
 .env*.local
 
 # vercel
@@ -30,3 +31,7 @@ npm-debug.log*
 *.tsbuildinfo
 
 /lib/generated/prisma
+
+# LM Arena local credentials and POST reports
+/lmarena/lmarena_post_config.json
+/lmarena/post_reports/

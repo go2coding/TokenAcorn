@@ -1,10 +1,13 @@
+import { loadEnvConfig } from "@next/env";
 import { PrismaClient } from "../lib/generated/prisma";
 import { PrismaLibSql } from "@prisma/adapter-libsql";
+import { getTursoConfig } from "../lib/turso";
 import * as fs from "fs";
 import * as path from "path";
 
-const dbPath = path.join(__dirname, "..", "data", "models.db");
-const adapter = new PrismaLibSql({ url: `file:${dbPath}` });
+loadEnvConfig(process.cwd());
+
+const adapter = new PrismaLibSql(getTursoConfig());
 const prisma = new PrismaClient({ adapter });
 
 const PROVIDERS_DIR = path.join(__dirname, "..", "data", "providers");

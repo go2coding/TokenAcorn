@@ -1,10 +1,9 @@
 import { PrismaClient } from "./generated/prisma";
 import { PrismaLibSql } from "@prisma/adapter-libsql";
-import path from "path";
+import { getTursoConfig } from "./turso";
 
 function createPrismaClient() {
-  const dbPath = path.join(process.cwd(), "data", "models.db");
-  const adapter = new PrismaLibSql({ url: `file:${dbPath}` });
+  const adapter = new PrismaLibSql(getTursoConfig());
   return new PrismaClient({ adapter });
 }
 

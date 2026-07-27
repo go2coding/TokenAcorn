@@ -8,11 +8,12 @@
     "start": "next start",
     "lint": "next lint",
     "db:push": "prisma db push",
-    "db:seed": "npx tsx prisma/seed.ts",
+    "db:migrate:turso": "tsx scripts/migrate-to-turso.ts",
+    "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio"
   },
   "prisma": {
-    "seed": "npx tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@libsql/client": "^0.17.3",
