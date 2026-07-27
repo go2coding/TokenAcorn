@@ -8,6 +8,8 @@ import Footer from "@/components/layout/Footer";
 import { locales, Locale } from "@/i18n/config";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
 
+export const dynamic = "force-dynamic";
+
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
