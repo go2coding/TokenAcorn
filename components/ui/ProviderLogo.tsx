@@ -36,6 +36,7 @@ const PROVIDER_LOGO_FORMAT: Record<string, "svg" | "png"> = {
   kimi: "png",
   bigmodel: "png",
   mimo: "svg",
+  meta: "png",
 };
 
 export default function ProviderLogo({ provider, size = 24 }: ProviderLogoProps) {
